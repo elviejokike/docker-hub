@@ -70,6 +70,7 @@ RUN cd && \
 ENV PATH ${PATH}:/opt/node/bin
 
 RUN npm install react-native-cli -g
+RUN npm install rnpm -g
 
 ENV LANG en_US.UTF-8
 
