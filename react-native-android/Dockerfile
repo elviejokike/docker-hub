@@ -1,5 +1,5 @@
 # Pull base image.
-FROM ubuntu:trusty
+FROM ubuntu:14.04
 
 # Install base software packages
 RUN apt-get update && \
