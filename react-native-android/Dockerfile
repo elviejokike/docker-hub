@@ -41,7 +41,9 @@ RUN dpkg --add-architecture i386 && \
     apt-get clean
 
 
+# ——————————
 # Installs Android SDK
+# ——————————
 
 ENV ANDROID_SDK_VERSION r24.4.1
 ENV ANDROID_BUILD_TOOLS_VERSION 23.0.3
@@ -59,6 +61,24 @@ RUN cd /opt && \
 
 
 # ——————————
+# Installs Gradle
+# ——————————
+
+# Gradle
+ENV GRADLE_VERSION 2.4
+
+RUN cd /usr/lib \
+ && curl -fl https://downloads.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip -o gradle-bin.zip \
+ && unzip "gradle-bin.zip" \
+ && ln -s "/usr/lib/gradle-${GRADLE_VERSION}/bin/gradle" /usr/bin/gradle \
+ && rm "gradle-bin.zip"
+
+# Set Appropriate Environmental Variables
+ENV GRADLE_HOME /usr/lib/gradle
+ENV PATH $PATH:$GRADLE_HOME/bin
+
+
+# ——————————
 # Install Node and global packages
 # ——————————
 ENV NODE_VERSION 5.6.0
@@ -69,6 +89,10 @@ RUN cd && \
     rm node-v${NODE_VERSION}-linux-x64.tar.gz
 ENV PATH ${PATH}:/opt/node/bin
 
+
+# ——————————
+# Install Basic React-Native packages
+# ——————————
 RUN npm install react-native-cli -g
 RUN npm install rnpm -g
 
