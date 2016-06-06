@@ -73,6 +73,3 @@ RUN npm install react-native-cli -g
 RUN npm install rnpm -g
 
 ENV LANG en_US.UTF-8
-
-# Define default command.
-CMD ["bash”]
